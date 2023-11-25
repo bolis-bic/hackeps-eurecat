@@ -30,7 +30,6 @@ services:
       MQTT_TOPIC: ${MQTT_TOPIC}
       MQTT_USERNAME: ${MQTT_USERNAME}
       MQTT_PASSWORD: ${MQTT_PASSWORD}
-      MQTT_CLIENT_ID: ${MQTT_CLIENT_ID}
 
   grafana:
     image: grafana/grafana:10.2.2
