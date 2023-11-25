@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  mqtt_client:
+    build: ./client
+    environment:
+      GROUP: ${GROUP}
+      BROKER_ADDRESS: ${BROKER_ADDRESS}
+      BROKER_ADDRESS_PORT: ${BROKER_ADDRESS_PORT}
+      TOPIC: ${BROKER_TOPIC}
+      USER: ${MQTT_CREDENTIALS_USER}
+      PASSWORD: ${MQTT_CREDENTIALS_PASSWORD}
