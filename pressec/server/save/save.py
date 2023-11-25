@@ -66,11 +66,9 @@ def save_record(message, write_api):
 
     record_dict = {
         "measurement": device_id,
-        "tags": {
-            "measurement": measurement
-        },
+        "tags": {"measurement": measurement},
         "fields": {"value": payload["value"]},
-        "time": int(payload["unix_timestamp"]) * 1_000_000_000
+        "time": int(payload["unix_timestamp"]) * 1_000_000_000,
     }
     record = Point.from_dict(record_dict)
 
@@ -92,7 +90,7 @@ def main():
             username=MQTT_USERNAME,
             password=MQTT_PASSWORD,
             broker=MQTT_BROKER,
-            port=MQTT_PORT
+            port=MQTT_PORT,
         )
         mqtt_client.subscribe(MQTT_TOPIC)
 
