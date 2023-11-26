@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  jupyter:
+    build: ./notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebook/work:/home/jovyan/work
+      
