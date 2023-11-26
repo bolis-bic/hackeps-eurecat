@@ -19,7 +19,6 @@ MQTT_TOPIC = os.environ.get("MQTT_TOPIC")
 MQTT_USERNAME = os.environ.get("MQTT_USERNAME")
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
 
-
 WRITE_OPTIONS = WriteOptions(
     batch_size=1_000,
     flush_interval=1_000,
@@ -31,6 +30,7 @@ def init_logging():
 
 
 def init_signal_handler():
+
     def signal_handler(sig, frame):
         logging.info(f"Received signal {sig}. Exiting gracefully.")
         sys.exit(0)
@@ -40,6 +40,7 @@ def init_signal_handler():
 
 
 def get_mqtt_client(username, password, broker="localhost", port=1883):
+
     def on_connect(client, userdata, flags, rc):
         if rc == 0:
             logging.info("Connected to MQTT Broker!")
@@ -66,8 +67,12 @@ def save_record(message, write_api):
 
     record_dict = {
         "measurement": device_id,
-        "tags": {"measurement": measurement},
-        "fields": {"value": payload["value"]},
+        "tags": {
+            "measurement": measurement
+        },
+        "fields": {
+            "value": payload["value"]
+        },
         "time": int(payload["unix_timestamp"]) * 1_000_000_000,
     }
     record = Point.from_dict(record_dict)
@@ -81,9 +86,8 @@ def main():
     init_signal_handler()
 
     try:
-        influxdb_client = get_influxdb_client(
-            INFLUXDB_URL, INFLUXDB_TOKEN, INFLUXDB_ORG
-        )
+        influxdb_client = get_influxdb_client(INFLUXDB_URL, INFLUXDB_TOKEN,
+                                              INFLUXDB_ORG)
         write_api = influxdb_client.write_api(write_options=WRITE_OPTIONS)
 
         mqtt_client = get_mqtt_client(
