@@ -1,0 +1,14 @@
+apiVersion: 1
+
+datasources:
+- name: InfluxDB
+  type: influxdb
+  access: proxy
+  url: http://influxdb:8086
+  uid: P951FEA4DE68E13C5
+  jsonData:
+    version: Flux
+    organization: hackeps
+    defaultBucket: data
+  secureJsonData:
+    token: Vif-0R9cDsEqSqvQKqEkECZ6-s49G62wVgulNl6dkfEa3Mhv4SObh-AnfN9Ai6CwFq39-v-HVo42RIdF9ifIkw==
